@@ -4,6 +4,7 @@ import SyntaxHighlighter, {registerLanguage} from 'react-syntax-highlighter/dist
 import js from 'react-syntax-highlighter/dist/languages/javascript'
 import syntaxStyle from './syntaxStyle'
 import styles from './App.css'
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 registerLanguage('javascript', js)
 
@@ -13,33 +14,72 @@ const App = ({onSelectTab, selectedTab, onRestart, recording}) => {
     let script = ''
     if (selectedTab === 'Generate Code') {
         script = getScript(recording)
+
+        return (
+            <div>
+                <Tablist marginX={-4} marginBottom={16} textAlign='center'>
+                    {tabs.map((tab, index) => (
+                        <Tab
+                            key={tab}
+                            id={tab}
+                            isSelected={tab === selectedTab}
+                            onSelect={() => onSelectTab(tab)}
+                            aria-controls={`panel-${tab}`}
+                        >
+                            {tab}
+                        </Tab>
+                    ))}
+                </Tablist>
+
+                <SyntaxHighlighter language='javascript' style={syntaxStyle}>
+                    {script}
+                </SyntaxHighlighter>
+
+                <button className={styles.button} onClick={onRestart}>Restart</button>
+            </div>
+        )
+
     } else if (selectedTab === 'Generate Test Case') {
         script = getPuppeteer(recording)
+
+        var products = [{
+            id: 1,
+            name: "Product1",
+            price: 120
+        }, {
+            id: 2,
+            name: "Product2",
+            price: 80
+        }];
+
+        return (
+            <div>
+                <Tablist marginX={-4} marginBottom={16} textAlign='center'>
+                    {tabs.map((tab, index) => (
+                        <Tab
+                            key={tab}
+                            id={tab}
+                            isSelected={tab === selectedTab}
+                            onSelect={() => onSelectTab(tab)}
+                            aria-controls={`panel-${tab}`}
+                        >
+                            {tab}
+                        </Tab>
+                    ))}
+                </Tablist>
+
+                <BootstrapTable data={products} striped hover>
+                    <TableHeaderColumn isKey dataField='id'>Product ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
+                </BootstrapTable>
+
+                <button className={styles.button} onClick={onRestart}>Restart</button>
+
+            </div>
+        )
     }
 
-    return (
-        <div>
-            <Tablist marginX={-4} marginBottom={16} textAlign='center'>
-                {tabs.map((tab, index) => (
-                    <Tab
-                        key={tab}
-                        id={tab}
-                        isSelected={tab === selectedTab}
-                        onSelect={() => onSelectTab(tab)}
-                        aria-controls={`panel-${tab}`}
-                    >
-                        {tab}
-                    </Tab>
-                ))}
-            </Tablist>
-
-            <SyntaxHighlighter language='javascript' style={syntaxStyle}>
-                {script}
-            </SyntaxHighlighter>
-
-            <button className={styles.button} onClick={onRestart}>Restart</button>
-        </div>
-    )
 }
 
 function getScript(recording) {
