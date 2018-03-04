@@ -1,0 +1,21 @@
+{
+  "name": "bequem-generator",
+  "version": "3.0.1",
+  "manifest_version": 2,
+  "description": "A chrome extension to record your actions into headless chrome script and basic test cases.",
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs",
+    "*://*/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; https://*.segment.com https://*.mxpnl.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "images/icon-black.png",
+    "default_title": "Bequem Generator"
+  },
+  "background": {
+    "scripts": [ "background.js" ],
+    "persistent": false
+  }
+}
