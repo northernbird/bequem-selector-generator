@@ -40,17 +40,6 @@ const App = ({onSelectTab, selectedTab, onRestart, recording}) => {
         )
 
     } else if (selectedTab === 'Generate Test Case') {
-        script = getPuppeteer(recording)
-
-        var products = [{
-            id: 1,
-            name: "Product1",
-            price: 120
-        }, {
-            id: 2,
-            name: "Product2",
-            price: 80
-        }];
 
         return (
             <div>
@@ -68,10 +57,10 @@ const App = ({onSelectTab, selectedTab, onRestart, recording}) => {
                     ))}
                 </Tablist>
 
-                <BootstrapTable data={products} striped hover>
-                    <TableHeaderColumn isKey dataField='id'>Product ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn>
-                    <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
+                <BootstrapTable data={recording} striped hover>
+                    <TableHeaderColumn isKey dataField='action'>Action</TableHeaderColumn>
+                    <TableHeaderColumn dataField='url'>URL</TableHeaderColumn>
+                    <TableHeaderColumn dataField='selector'>Selector</TableHeaderColumn>
                 </BootstrapTable>
 
                 <button className={styles.button} onClick={onRestart}>Restart</button>
@@ -115,38 +104,6 @@ ${recording.reduce((records, record, i) => {
     .result((r) => console.log(r))
     .end()
     .then(() => chromy.close())`
-}
-
-function getPuppeteer(recording) {
-    return `const puppeteer = require('puppeteer')
-
-(async () => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-${recording.reduce((records, record, i) => {
-        const {action, url, selector, value} = record
-        let result = records
-        if (i !== records.length) result += '\n'
-
-        switch (action) {
-            case 'keydown':
-                result += `  await page.type('${selector}', '${value}')`
-                break
-            case 'click':
-                result += `  await page.click('${selector}')`
-                break
-            case 'goto':
-                result += `  await page.goto('${url}')`
-                break
-            case 'reload':
-                result += `  await page.reload()`
-                break
-        }
-
-        return result
-    }, '')}
-  await browser.close()
-})()`
 }
 
 export default App
