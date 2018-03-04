@@ -1,111 +1,110 @@
 import React from 'react'
-import { Tablist, Tab } from 'evergreen-ui'
-import SyntaxHighlighter, { registerLanguage } from 'react-syntax-highlighter/dist/light'
+import {Tablist, Tab} from 'evergreen-ui'
+import SyntaxHighlighter, {registerLanguage} from 'react-syntax-highlighter/dist/light'
 import js from 'react-syntax-highlighter/dist/languages/javascript'
 import syntaxStyle from './syntaxStyle'
 import styles from './App.css'
 
 registerLanguage('javascript', js)
 
-const tabs = ['Nightmare', 'Puppeteer']
+const tabs = ['Generate Code', 'Generate Test Case']
 
-const App = ({ onSelectTab, selectedTab, onRestart, recording }) => {
-  let script = ''
-  if (selectedTab === 'Nightmare') {
-    script = getNightmare(recording)
-  } else if (selectedTab === 'Puppeteer') {
-    script = getPuppeteer(recording)
-  }
+const App = ({onSelectTab, selectedTab, onRestart, recording}) => {
+    let script = ''
+    if (selectedTab === 'Generate Code') {
+        script = getScript(recording)
+    } else if (selectedTab === 'Generate Test Case') {
+        script = getPuppeteer(recording)
+    }
 
-  return (
-    <div>
-      <Tablist marginX={-4} marginBottom={16} textAlign='center'>
-        {tabs.map((tab, index) => (
-          <Tab
-            key={tab}
-            id={tab}
-            isSelected={tab === selectedTab}
-            onSelect={() => onSelectTab(tab)}
-            aria-controls={`panel-${tab}`}
-          >
-            {tab}
-          </Tab>
-        ))}
-      </Tablist>
+    return (
+        <div>
+            <Tablist marginX={-4} marginBottom={16} textAlign='center'>
+                {tabs.map((tab, index) => (
+                    <Tab
+                        key={tab}
+                        id={tab}
+                        isSelected={tab === selectedTab}
+                        onSelect={() => onSelectTab(tab)}
+                        aria-controls={`panel-${tab}`}
+                    >
+                        {tab}
+                    </Tab>
+                ))}
+            </Tablist>
 
-      <SyntaxHighlighter language='javascript' style={syntaxStyle}>
-        {script}
-      </SyntaxHighlighter>
+            <SyntaxHighlighter language='javascript' style={syntaxStyle}>
+                {script}
+            </SyntaxHighlighter>
 
-      <button className={styles.button} onClick={onRestart}>Restart</button>
-    </div>
-  )
+            <button className={styles.button} onClick={onRestart}>Restart</button>
+        </div>
+    )
 }
 
-function getNightmare (recording) {
-  return `const Nightmare = require('nightmare')
-const nightmare = Nightmare({ show: true })
+function getScript(recording) {
+    return `const Chromy = require('chromy')
+let chromy = new Chromy({visible:true})
 
-nightmare
+chromy.chain()
 ${recording.reduce((records, record, i) => {
-  const { action, url, selector, value } = record
-  let result = records
-  if (i !== records.length) result += '\n'
+        const {action, url, selector, value} = record
+        let result = records
+        if (i !== records.length) result += '\n'
 
-  switch (action) {
-    case 'keydown':
-      result += `.type('${selector}', '${value}')`
-      break
-    case 'click':
-      result += `.click('${selector}')`
-      break
-    case 'goto':
-      result += `.goto('${url}')`
-      break
-    case 'reload':
-      result += `.refresh()`
-      break
-  }
+        switch (action) {
+            case 'keydown':
+                result += `.type('${selector}', '${value}')`
+                break
+            case 'click':
+                result += `.click('${selector}')`
+                break
+            case 'goto':
+                result += `.goto('${url}')`
+                break
+            case 'reload':
+                result += `.refresh()`
+                break
+        }
 
-  return result
-}, '')}
-.end()
-.then(function (result) {
-  console.log(result)
-})
-.catch(function (error) {
-  console.error('Error:', error);
-});`
+        return result
+    }, '')}
+    .evaluate(() => {
+        return document.querySelectorAll('*').length
+    })
+    .result((r) => console.log(r))
+    .end()
+    .then(() => chromy.close())`
 }
 
-function getPuppeteer (recording) {
-  return `const puppeteer = require('puppeteer')
+function getPuppeteer(recording) {
+    return `const puppeteer = require('puppeteer')
 
 (async () => {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
 ${recording.reduce((records, record, i) => {
-  const { action, url, selector, value } = record
-  let result = records
-  if (i !== records.length) result += '\n'
+        const {action, url, selector, value} = record
+        let result = records
+        if (i !== records.length) result += '\n'
 
-  switch (action) {
-    case 'keydown':
-      result += `  await page.type('${selector}', '${value}')`
-      break
-    case 'click':
-      result += `  await page.click('${selector}')`
-      break
-    case 'goto':
-      result += `  await page.goto('${url}')`
-      break
-    case 'reload':
-      result += `  await page.reload()`
-      break
-  }
+        switch (action) {
+            case 'keydown':
+                result += `  await page.type('${selector}', '${value}')`
+                break
+            case 'click':
+                result += `  await page.click('${selector}')`
+                break
+            case 'goto':
+                result += `  await page.goto('${url}')`
+                break
+            case 'reload':
+                result += `  await page.reload()`
+                break
+        }
 
-  return result
-}, '')}
+        return result
+    }, '')}
   await browser.close()
 })()`
 }
