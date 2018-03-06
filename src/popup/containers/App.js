@@ -26,8 +26,6 @@ export default class AppContainer extends Component {
     componentDidMount() {
 
         chrome.storage.sync.get(['recording', 'components'], ({recording, components}) => {
-            console.log("hello componentDidMount 2");
-            console.log("hello get storage");
             this.setState({recording, components})
         })
 

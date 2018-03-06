@@ -57,6 +57,8 @@ class HTMLRecorder {
             chrome.runtime.sendMessage({
                 selector: selector.getSelector(typeableElements[i]),
                 value: typeableElements[i].value,
+                id: typeableElements[i].id,
+                name: typeableElements[i].name,
                 action: 'component'
             })
 
@@ -67,6 +69,8 @@ class HTMLRecorder {
             chrome.runtime.sendMessage({
                 selector: selector.getSelector(clickableElements[i]),
                 value: clickableElements[i].value,
+                id: clickableElements[i].id,
+                name: clickableElements[i].name,
                 action: 'component'
             })
 

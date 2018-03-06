@@ -59,9 +59,10 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
                 TEST TEST : {JSON.stringify(components)}
 
-                <BootstrapTable data={recording} striped hover>
-                    <TableHeaderColumn isKey dataField='action'>Action</TableHeaderColumn>
-                    <TableHeaderColumn dataField='url'>URL</TableHeaderColumn>
+                <BootstrapTable data={components} striped hover>
+                    <TableHeaderColumn isKey dataField='id'>ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
+                    <TableHeaderColumn dataField='value'>Value</TableHeaderColumn>
                     <TableHeaderColumn dataField='selector'>Selector</TableHeaderColumn>
                 </BootstrapTable>
 
