@@ -44,3 +44,36 @@ function sendMessage (e) {
 
 const eventRecorder = new EventRecorder()
 eventRecorder.start()
+
+
+class HTMLRecorder {
+    start () {
+        const typeableElements = document.querySelectorAll('input, textarea')
+        // const clickableElements = document.querySelectorAll('a, button')
+        const clickableElements = document.querySelectorAll('button')
+
+        for (let i = 0; i < typeableElements.length; i++) {
+
+            chrome.runtime.sendMessage({
+                selector: selector.getSelector(typeableElements[i]),
+                value: typeableElements[i].value,
+                action: 'component'
+            })
+
+        }
+
+        for (let i = 0; i < clickableElements.length; i++) {
+
+            chrome.runtime.sendMessage({
+                selector: selector.getSelector(clickableElements[i]),
+                value: clickableElements[i].value,
+                action: 'component'
+            })
+
+        }
+    }
+
+}
+
+const htmlRecorder = new HTMLRecorder()
+htmlRecorder.start()

@@ -11,7 +11,7 @@ export default class Daydream {
     chrome.browserAction.onClicked.addListener(() => {
       if (this.isRunning) {
         this.recorder.stop()
-        chrome.storage.sync.set({ recording: this.recorder.recording })
+        chrome.storage.sync.set({ recording: this.recorder.recording, components: this.recorder.components })
         chrome.browserAction.setIcon({ path: './images/icon-black.png' })
         chrome.browserAction.setPopup({ popup: 'index.html' })
         chrome.browserAction.setBadgeText({ text: '1' })

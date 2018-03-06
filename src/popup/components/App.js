@@ -10,7 +10,7 @@ registerLanguage('javascript', js)
 
 const tabs = ['Generate Code', 'Generate Test Case']
 
-const App = ({onSelectTab, selectedTab, onRestart, recording}) => {
+const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
     let script = ''
     if (selectedTab === 'Generate Code') {
         script = getScript(recording)
@@ -56,6 +56,8 @@ const App = ({onSelectTab, selectedTab, onRestart, recording}) => {
                         </Tab>
                     ))}
                 </Tablist>
+
+                TEST TEST : {JSON.stringify(components)}
 
                 <BootstrapTable data={recording} striped hover>
                     <TableHeaderColumn isKey dataField='action'>Action</TableHeaderColumn>
