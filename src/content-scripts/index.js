@@ -38,7 +38,7 @@ function sendMessage (e) {
   chrome.runtime.sendMessage({
     selector: selector.getSelector(e.target),
     value: e.target.value,
-    action: e.type
+    action: e.type,
   })
 }
 
@@ -59,6 +59,7 @@ class HTMLRecorder {
                 value: typeableElements[i].value,
                 id: typeableElements[i].id,
                 name: typeableElements[i].name,
+                tagName: typeableElements[i].tagName,
                 action: 'component'
             })
 
@@ -71,6 +72,7 @@ class HTMLRecorder {
                 value: clickableElements[i].value,
                 id: clickableElements[i].id,
                 name: clickableElements[i].name,
+                tagName: clickableElements[i].tagName,
                 action: 'component'
             })
 

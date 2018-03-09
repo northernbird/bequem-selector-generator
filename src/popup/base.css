@@ -1,5 +1,9 @@
 body {
-  width: 350px;
-  height: 350px;
+  width: 700px;
+  height: 700px;
   -webkit-font-smoothing: antialiased;
+}
+
+table {
+    border: #49B882;
 }

@@ -52,7 +52,7 @@ const development = {
       ...base.module.rules,
       {
         test: /\.css$/,
-        include: /src/,
+        include: [/src/, /node_modules/],
         use: [
           'style-loader',
           {
@@ -63,7 +63,14 @@ const development = {
             }
           }
         ]
-      }
+      },
+        {
+            test: /\.(ttf|otf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?|(jpg|gif)$/,
+            include: /node_modules/,
+            use: [
+                'url-loader'
+            ]
+        }
     ]
   },
   plugins: [
@@ -81,7 +88,7 @@ const production = {
       ...base.module.rules,
       {
         test: /\.css$/,
-        include: /src/,
+          include: [/src/, /node_modules/],
         use: ExtractTextPlugin.extract({
           use: [
             {
