@@ -14,35 +14,17 @@ registerLanguage('javascript', js)
 const tabs = ['Generate Code', 'Generate Test Case']
 
 const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
-    let script = ''
+
+    let contentByType = null;
+
     if (selectedTab === 'Generate Code') {
-        script = getScript(recording)
 
-        return (
-            <div className={styles.test}>
-                <Tablist marginX={-4} marginBottom={16} textAlign='center'>
-                    {tabs.map((tab, index) => (
-                        <Tab
-                            key={tab}
-                            id={tab}
-                            isSelected={tab === selectedTab}
-                            onSelect={() => onSelectTab(tab)}
-                            aria-controls={`panel-${tab}`}
-                        >
-                            {tab}
-                        </Tab>
-                    ))}
-                </Tablist>
+        const script = getScript(recording)
 
-                <SyntaxHighlighter language='javascript' style={syntaxStyle} textAlign='center'>
-                    {script}
-                </SyntaxHighlighter>
-
-                <div className={styles.buttonDiv}>
-                    <button className={styles.button} onClick={onRestart}>Restart</button>
-                </div>
-
-            </div>
+        contentByType = (
+            <SyntaxHighlighter language='javascript' style={syntaxStyle} textAlign='center'>
+                {script}
+            </SyntaxHighlighter>
         )
 
     } else if (selectedTab === 'Generate Test Case') {
@@ -64,30 +46,35 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
             text: 'TagName'
         }];
 
-        return (
-
-            <div className={styles.test}>
-                <Tablist marginX={-4} marginBottom={16} textAlign='center'>
-                    {tabs.map((tab, index) => (
-                        <Tab
-                            key={tab}
-                            id={tab}
-                            isSelected={tab === selectedTab}
-                            onSelect={() => onSelectTab(tab)}
-                            aria-controls={`panel-${tab}`}
-                        >
-                            {tab}
-                        </Tab>
-                    ))}
-                </Tablist>
-
-                <BootstrapTable keyField='id' data={ components } columns={ columns } />
-
-                <button className={styles.button} onClick={onRestart}>Restart</button>
-
-            </div>
+        contentByType =  (
+            <BootstrapTable keyField='id' data={components} columns={columns}/>
         )
     }
+
+
+    return (<div className={styles.test}>
+
+        <Tablist marginX={-4} marginBottom={16} textAlign='center'>
+            {tabs.map((tab, index) => (
+                <Tab
+                    key={tab}
+                    id={tab}
+                    isSelected={tab === selectedTab}
+                    onSelect={() => onSelectTab(tab)}
+                    aria-controls={`panel-${tab}`}
+                >
+                    {tab}
+                </Tab>
+            ))}
+        </Tablist>
+
+        {contentByType}
+
+        <div className={styles.buttonDiv}>
+            <button className={styles.button} onClick={onRestart}>Restart</button>
+        </div>
+
+    </div>)
 
 }
 
