@@ -5,8 +5,6 @@ pre {
 
 .button {
   position: relative;
-  left: 120px;
-  top: 190px;
   cursor: pointer;
   border-radius: 5px;
   border-color: #49B882;
@@ -19,7 +17,7 @@ pre {
   text-decoration: none;
   background-color: #49B882;
   color: #fff;
-  margin: 10px;
+  margin: auto;
 }
 
 .button:hover {
@@ -28,4 +26,13 @@ pre {
 
 .button:focus {
   outline: none;
+}
+
+.buttonDiv {
+    text-align: center;
+}
+
+.test {
+  margin-left: auto;
+  margin-right: auto;
 }

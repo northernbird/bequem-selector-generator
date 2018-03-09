@@ -19,7 +19,7 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
         script = getScript(recording)
 
         return (
-            <div>
+            <div className={styles.test}>
                 <Tablist marginX={-4} marginBottom={16} textAlign='center'>
                     {tabs.map((tab, index) => (
                         <Tab
@@ -38,7 +38,10 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
                     {script}
                 </SyntaxHighlighter>
 
-                <button className={styles.button} onClick={onRestart}>Restart</button>
+                <div className={styles.buttonDiv}>
+                    <button className={styles.button} onClick={onRestart}>Restart</button>
+                </div>
+
             </div>
         )
 
@@ -63,7 +66,7 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
         return (
 
-            <div>
+            <div className={styles.test}>
                 <Tablist marginX={-4} marginBottom={16} textAlign='center'>
                     {tabs.map((tab, index) => (
                         <Tab
