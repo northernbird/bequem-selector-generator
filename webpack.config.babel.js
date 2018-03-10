@@ -52,7 +52,7 @@ const development = {
       ...base.module.rules,
       {
         test: /\.css$/,
-        include: [/src/, /node_modules/],
+        include: [/src/],
         use: [
           'style-loader',
           {

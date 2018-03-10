@@ -9,9 +9,9 @@ pre {
   border-radius: 5px;
   border-color: #49B882;
   border-style: none;
-  padding: 3px 15px 5px;
+  padding: 6px 30px 10px;
   text-transform: lowercase;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1;
   display: inline-block;
   text-decoration: none;
@@ -48,6 +48,20 @@ pre {
 
 .tabClass {
     margin-top:20px;
+}
+
+.menuTab {
+    background-color: #49B882 !important;
+    color:white !important;
+    font-size: 13px !important;
+    padding: 10px 15px 10px !important;
+}
+
+.defaultMenuTab {
+    background-color: rgba(1, 108, 209, 0.08);
+    color:rgb(1, 108, 209);
+    font-size: 13px;
+    padding: 10px 15px 10px !important;
 }
 
 .col-id {

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import App from '../components/App'
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 
 export default class AppContainer extends Component {
     constructor(props) {

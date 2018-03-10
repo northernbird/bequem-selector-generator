@@ -83,6 +83,8 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
                     isSelected={tab === selectedTab}
                     onSelect={() => onSelectTab(tab)}
                     aria-controls={`panel-${tab}`}
+                    backgroundColor= '#49B882'
+                    className={tab === selectedTab ? styles.menuTab: styles.defaultMenuTab}
                 >
                     {tab}
                 </Tab>
