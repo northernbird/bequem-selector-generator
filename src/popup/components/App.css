@@ -36,6 +36,8 @@ pre {
 
 .tableDiv {
     overflow: auto;
+    table-layout: fixed;
+    width:100%;
 }
 
 .tableWrapDiv {
@@ -47,3 +49,25 @@ pre {
 .tabClass {
     margin-top:20px;
 }
+
+.col-id {
+    width:20%;
+}
+
+.col-name {
+    width:15%;
+}
+
+.col-value {
+    width:20%;
+}
+
+.col-selector {
+    width:30%;
+}
+
+.col-tagName {
+    width:15%;
+}
+
+

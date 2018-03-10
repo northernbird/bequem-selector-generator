@@ -33,19 +33,34 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
         const columns = [{
             dataField: 'id',
-            text: 'ID'
+            text: 'ID',
+            classes: styles["col-id"],
+            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerClasses: styles["col-id"]
         }, {
             dataField: 'name',
-            text: 'Name'
+            text: 'Name',
+            classes: styles["col-name"],
+            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerClasses: styles["col-name"]
         }, {
             dataField: 'value',
-            text: 'Value'
+            text: 'Value',
+            classes: styles["col-value"],
+            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerClasses: styles["col-value"]
         }, {
             dataField: 'selector',
-            text: 'Selector'
+            text: 'Selector',
+            classes: styles["col-selector"],
+            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerClasses: styles["col-selector"]
         }, {
             dataField: 'tagName',
-            text: 'TagName'
+            text: 'TagName',
+            classes : styles["col-tagName"],
+            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerClasses: styles["col-tagName"]
         }];
 
         contentByType =  (
