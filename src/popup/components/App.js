@@ -60,7 +60,7 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
     return (<div>
 
-        <Tablist marginX={-4} marginBottom={16} textAlign='center'>
+        <Tablist marginX={-4} marginBottom={16} textAlign='center' className={styles.tabClass}>
             {tabs.map((tab, index) => (
                 <Tab
                     key={tab}
