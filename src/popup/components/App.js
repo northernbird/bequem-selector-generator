@@ -4,9 +4,11 @@ import SyntaxHighlighter, {registerLanguage} from 'react-syntax-highlighter/dist
 import js from 'react-syntax-highlighter/dist/languages/javascript'
 import syntaxStyle from './syntaxStyle'
 import styles from './App.css'
-//import 'bootstrap3/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
+/*
+ * TODO Need to check why importing css doesn't work here.
+ */
+//import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 
 registerLanguage('javascript', js)
@@ -47,12 +49,16 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
         }];
 
         contentByType =  (
-            <BootstrapTable keyField='id' data={components} columns={columns}/>
+            <div className={styles.tableWrapDiv}>
+                <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}/>
+            </div>
+
         )
+
     }
 
 
-    return (<div className={styles.test}>
+    return (<div>
 
         <Tablist marginX={-4} marginBottom={16} textAlign='center'>
             {tabs.map((tab, index) => (

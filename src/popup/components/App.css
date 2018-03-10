@@ -29,10 +29,17 @@ pre {
 }
 
 .buttonDiv {
+    margin-top:20px;
     text-align: center;
+    overflow:auto;
 }
 
-.test {
-  margin-left: auto;
-  margin-right: auto;
+.tableDiv {
+    overflow: auto;
+}
+
+.tableWrapDiv {
+    margin-top:20px;
+    height: 300px;
+    overflow: auto;
 }
