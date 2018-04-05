@@ -1,46 +1,57 @@
 import Selector from 'css-selector-generator'
 
 const selector = new Selector()
+let currentElement
 
 class EventRecorder {
-  start () {
-    const typeableElements = document.querySelectorAll('input, textarea')
-    const clickableElements = document.querySelectorAll('a, button')
+    start() {
+        const typeableElements = document.querySelectorAll('input, textarea')
+        const clickableElements = document.querySelectorAll('a, button')
 
-    for (let i = 0; i < typeableElements.length; i++) {
-      typeableElements[i].addEventListener('keydown', this.handleKeydown)
+        for (let i = 0; i < typeableElements.length; i++) {
+            typeableElements[i].addEventListener('blur', this.handleBlur)
+            typeableElements[i].addEventListener("focus", this.handleForcus)
+        }
+
+        for (let i = 0; i < clickableElements.length; i++) {
+            clickableElements[i].addEventListener('click', this.handleClick)
+        }
     }
 
-    for (let i = 0; i < clickableElements.length; i++) {
-      clickableElements[i].addEventListener('click', this.handleClick)
+    handleForcus(e) {
+        currentElement = e.target;
     }
-  }
 
-  handleKeydown (e) {
-      
-    if (e.keyCode !== 9) {
-      return
+
+    handleBlur(e) {
+
+        if (currentElement) {
+            chrome.runtime.sendMessage({
+                selector: selector.getSelector(currentElement),
+                value: currentElement.value,
+                action: 'keydown',
+            })
+        }
+
+        currentElement = null;
+
     }
-    sendMessage(e)
-  }
 
-  handleClick (e) {
-    if (e.target.href) {
-      chrome.runtime.sendMessage({
-        action: 'url',
-        value: e.target.href
-      })
+    handleClick(e) {
+        if (e.target.href) {
+            chrome.runtime.sendMessage({
+                action: 'url',
+                value: e.target.href
+            })
+        } else {
+            chrome.runtime.sendMessage({
+                selector: selector.getSelector(e.target),
+                value: e.target.value,
+                action: e.type,
+            })
+        }
+
     }
-    sendMessage(e)
-  }
-}
-
-function sendMessage (e) {
-  chrome.runtime.sendMessage({
-    selector: selector.getSelector(e.target),
-    value: e.target.value,
-    action: e.type,
-  })
 }
 
 const eventRecorder = new EventRecorder()
@@ -48,7 +59,7 @@ eventRecorder.start()
 
 
 class HTMLRecorder {
-    start () {
+    start() {
         const typeableElements = document.querySelectorAll('input, textarea')
         // const clickableElements = document.querySelectorAll('a, button')
         const clickableElements = document.querySelectorAll('button')
