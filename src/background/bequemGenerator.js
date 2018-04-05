@@ -12,9 +12,8 @@ export default class Daydream {
       if (this.isRunning) {
         this.recorder.stop()
         chrome.storage.sync.set({ recording: this.recorder.recording, components: this.recorder.components })
-        chrome.browserAction.setIcon({ path: './images/icon-black.png' })
+        chrome.browserAction.setIcon({ path: './images/icon-red.png' })
         chrome.browserAction.setPopup({ popup: 'index.html' })
-        chrome.browserAction.setBadgeText({ text: '1' })
       } else {
         this.recorder.start()
         chrome.browserAction.setIcon({ path: './images/icon-green.png' })

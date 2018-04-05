@@ -36,7 +36,7 @@ export default class AppContainer extends Component {
     }
 
     onRestart() {
-        chrome.browserAction.setBadgeText({text: ''})
+        chrome.browserAction.setIcon({ path: './images/icon-black.png' })
         chrome.runtime.reload()
         window.close()
     }

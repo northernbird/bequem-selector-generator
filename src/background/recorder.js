@@ -31,9 +31,6 @@ export default class Recorder {
 
     handleMessage(message) {
 
-        console.log("AAABBBCCC : ");
-        console.log("message : " + JSON.stringify(message));
-
         if (message.action === 'url') {
             this.lastUrl = message.value
         } else if (message.action === 'component') {

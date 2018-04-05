@@ -128,12 +128,12 @@ ${recording.reduce((records, record, i) => {
 
         return result
     }, '')}
-    .evaluate(() => {
-        return document.querySelectorAll('*').length
-    })
-    .result((r) => console.log(r))
-    .end()
-    .then(() => chromy.close())`
+.evaluate(() => {
+    return document.querySelectorAll('*').length
+})
+.result((r) => console.log(r))
+.end()
+.then(() => chromy.close())`
 }
 
 export default App
