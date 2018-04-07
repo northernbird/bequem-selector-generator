@@ -36,31 +36,32 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
             text: 'ID',
             classes: styles["col-id"],
             headerStyle: { backgroundColor: '#49B882', color: 'white' },
-            headerClasses: styles["col-id"]
+            headerClasses: styles["col-id"],
+
         }, {
             dataField: 'name',
             text: 'Name',
             classes: styles["col-name"],
             headerStyle: { backgroundColor: '#49B882', color: 'white' },
-            headerClasses: styles["col-name"]
+            headerClasses: styles["col-name"],
         }, {
             dataField: 'value',
             text: 'Value',
             classes: styles["col-value"],
             headerStyle: { backgroundColor: '#49B882', color: 'white' },
-            headerClasses: styles["col-value"]
-        }, {
-            dataField: 'selector',
-            text: 'Selector',
-            classes: styles["col-selector"],
-            headerStyle: { backgroundColor: '#49B882', color: 'white' },
-            headerClasses: styles["col-selector"]
+            headerClasses: styles["col-value"],
         }, {
             dataField: 'tagName',
             text: 'TagName',
             classes : styles["col-tagName"],
             headerStyle: { backgroundColor: '#49B882', color: 'white' },
-            headerClasses: styles["col-tagName"]
+            headerClasses: styles["col-tagName"],
+        }, {
+            dataField: 'inputType',
+            text: 'InputType',
+            classes : styles["col-tagName"],
+            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerClasses: styles["col-inputType"],
         }];
 
         contentByType =  (
