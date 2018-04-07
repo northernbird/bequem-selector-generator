@@ -94,7 +94,7 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
         {contentByType}
 
         <div className={styles.buttonDiv}>
-            <button className={styles.button} onClick={onRestart}>Restart</button>
+            <button className={styles.button} onClick={onRestart}>Clear</button>
         </div>
 
     </div>)
