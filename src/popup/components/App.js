@@ -35,7 +35,20 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
             mode: 'checkbox',
             bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
             hideSelectColumn: true, // enable hide selection column.
-            clickToSelect: true  // you should enable clickToSelect, otherwise, you can't select column.
+            clickToSelect: true,  // you should enable clickToSelect, otherwise, you can't select column.
+            onSelect: (row, isSelected, e) => {
+
+                console.log("test : " + isSelected);
+
+                if (isSelected) {
+
+                    chrome.tabs.executeScript({
+                        file: 'alert.js'
+                    });
+
+                }
+
+            },
         };
 
 
@@ -43,38 +56,39 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
             dataField: 'id',
             text: 'ID/SELECTOR',
             classes: styles["col-id"],
-            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerStyle: {backgroundColor: '#49B882', color: 'white'},
             headerClasses: styles["col-id"],
 
         }, {
             dataField: 'name',
             text: 'Name',
             classes: styles["col-name"],
-            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerStyle: {backgroundColor: '#49B882', color: 'white'},
             headerClasses: styles["col-name"],
         }, {
             dataField: 'value',
             text: 'Value',
             classes: styles["col-value"],
-            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            headerStyle: {backgroundColor: '#49B882', color: 'white'},
             headerClasses: styles["col-value"],
         }, {
             dataField: 'tagName',
             text: 'TagName',
-            classes : styles["col-tagName"],
-            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            classes: styles["col-tagName"],
+            headerStyle: {backgroundColor: '#49B882', color: 'white'},
             headerClasses: styles["col-tagName"],
         }, {
             dataField: 'inputType',
             text: 'InputType',
-            classes : styles["col-tagName"],
-            headerStyle: { backgroundColor: '#49B882', color: 'white' },
+            classes: styles["col-tagName"],
+            headerStyle: {backgroundColor: '#49B882', color: 'white'},
             headerClasses: styles["col-inputType"],
         }];
 
-        contentByType =  (
+        contentByType = (
             <div className={styles.tableWrapDiv}>
-                <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv} selectRow={ selectRowProp }/>
+                <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}
+                                selectRow={selectRowProp}/>
             </div>
 
         )
@@ -92,8 +106,8 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
                     isSelected={tab === selectedTab}
                     onSelect={() => onSelectTab(tab)}
                     aria-controls={`panel-${tab}`}
-                    backgroundColor= '#49B882'
-                    className={tab === selectedTab ? styles.menuTab: styles.defaultMenuTab}
+                    backgroundColor='#49B882'
+                    className={tab === selectedTab ? styles.menuTab : styles.defaultMenuTab}
                 >
                     {tab}
                 </Tab>

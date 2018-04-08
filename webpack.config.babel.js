@@ -11,7 +11,7 @@ const base = {
   entry: {
     background: './src/background/index.js',
     'content-script': './src/content-scripts/index.js',
-    popup: './src/popup/index.js'
+    popup: './src/popup/index.js',
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -29,7 +29,9 @@ const base = {
   plugins: [
     new CopyPlugin([
       { from: './src/manifest.json', to: './manifest.json' },
-      { from: './src/images', to: 'images' }
+      { from: './src/images', to: 'images' },
+      //TODO need to check how to configure injection javascript for chrome extension.
+      { from: './src/popup/components/alert.js', to: './' }
     ]),
     new HtmlWebpackPlugin({
       template: './src/popup/template.html',
