@@ -31,9 +31,17 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
     } else if (selectedTab === 'Generate Test Case') {
 
+        const selectRowProp = {
+            mode: 'checkbox',
+            bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
+            hideSelectColumn: true, // enable hide selection column.
+            clickToSelect: true  // you should enable clickToSelect, otherwise, you can't select column.
+        };
+
+
         const columns = [{
             dataField: 'id',
-            text: 'ID',
+            text: 'ID/SELECTOR',
             classes: styles["col-id"],
             headerStyle: { backgroundColor: '#49B882', color: 'white' },
             headerClasses: styles["col-id"],
@@ -66,7 +74,7 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
         contentByType =  (
             <div className={styles.tableWrapDiv}>
-                <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}/>
+                <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv} selectRow={ selectRowProp }/>
             </div>
 
         )

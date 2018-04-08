@@ -69,7 +69,7 @@ class HTMLRecorder {
             chrome.runtime.sendMessage({
                 selector: selector.getSelector(typeableElements[i]),
                 value: typeableElements[i].value,
-                id: (typeableElements[i].id==='') ? '-' : typeableElements[i].id,
+                id: (typeableElements[i].id==='') ? selector.getSelector(typeableElements[i]) : typeableElements[i].id,
                 name: typeableElements[i].name,
                 tagName: typeableElements[i].tagName,
                 inputType: (typeableElements[i].tagName==='INPUT') ? typeableElements[i].type : null,
@@ -83,7 +83,7 @@ class HTMLRecorder {
             chrome.runtime.sendMessage({
                 selector: selector.getSelector(clickableElements[i]),
                 value: clickableElements[i].value,
-                id: (typeableElements[i].id==='') ? '-' : typeableElements[i].id,
+                id: (clickableElements[i].id==='') ? selector.getSelector(clickableElements[i]) : clickableElements[i].id,
                 name: clickableElements[i].name,
                 tagName: clickableElements[i].tagName,
                 action: 'component'
