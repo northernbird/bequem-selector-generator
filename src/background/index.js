@@ -1,3 +1,3 @@
-import Daydream from './bequemGenerator'
-const daydream = new Daydream()
-daydream.boot()
+import BequemGenerator from './bequemGenerator'
+const bequemGenerator = new BequemGenerator()
+bequemGenerator.boot()
