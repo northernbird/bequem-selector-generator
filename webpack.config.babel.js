@@ -31,7 +31,7 @@ const base = {
       { from: './src/manifest.json', to: './manifest.json' },
       { from: './src/images', to: 'images' },
       //TODO need to check how to configure injection javascript for chrome extension.
-      { from: './src/popup/components/alert.js', to: './' },
+      { from: './src/popup/components/inject.js', to: './' },
       { from: './src/popup/components/lib/jquery-1.10.2.min.js', to: './lib/jquery-1.10.2.min.js' }
     ]),
     new HtmlWebpackPlugin({

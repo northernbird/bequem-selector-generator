@@ -38,12 +38,10 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
             clickToSelect: true,  // you should enable clickToSelect, otherwise, you can't select column.
             onSelect: (row, isSelected, e) => {
 
-                console.log("test : " + isSelected);
-
                 if (isSelected) {
 
                     chrome.tabs.executeScript(null, { file: './lib/jquery-1.10.2.min.js' }, function() {
-                        chrome.tabs.executeScript(null, { file: 'alert.js' });
+                        chrome.tabs.executeScript(null, { file: 'inject.js' });
                     });
 
                 }
