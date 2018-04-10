@@ -19,5 +19,29 @@
         $('body').append($blockBackground);
     }
 
+    /*
+     * Make light focus to the selected row
+     */
+    chrome.storage.local.get('selectedRow', function (row) {
+        console.log("Row : " + JSON.stringify(row));
+        chrome.storage.local.remove('selectedRow');
+    });
+
+    var testCSS =  {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        /* bring your own prefixes */
+        transform: 'translate(-50%, -50%)',
+        /* make higher than whatever is on the page */
+    };
+
+
+    var div = $('<input type="text" class="form-control" id="input-name" placeholder="お名前" required="required">');
+    div.appendTo($('body'));
+    div.css(testCSS);
+
+    console.log('inserted self... giggity');
+
 
 })(jQuery);
