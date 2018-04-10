@@ -40,8 +40,18 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
 
                 if (isSelected) {
 
-                    chrome.tabs.executeScript(null, { file: './lib/jquery-1.10.2.min.js' }, function() {
+                    console.log("TEST : " + JSON.stringify(row));
+
+/*                    chrome.tabs.executeScript(null, { file: './lib/jquery-1.10.2.min.js' }, function() {
                         chrome.tabs.executeScript(null, { file: 'inject.js' });
+                    });*/
+
+                    chrome.storage.local.set({
+                        selectedRow: row
+                    }, function () {
+                        chrome.tabs.executeScript(null, { file: './lib/jquery-1.10.2.min.js' }, function() {
+                            chrome.tabs.executeScript(null, { file: 'inject.js' });
+                        })
                     });
 
                 }
