@@ -24,8 +24,8 @@
                 left: (position.left),
                 backgroundColor: '#000',
                 opacity: 0.6,
-                width : $(data.selectedRow.selector).width(),
-                height : $(data.selectedRow.selector).height(),
+                width : $(data.selectedRow.selector).outerWidth(),
+                height : $(data.selectedRow.selector).outerHeight(),
             };
 
 
