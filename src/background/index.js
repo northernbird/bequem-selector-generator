@@ -1,3 +1,3 @@
-import BequemGenerator from './bequemGenerator'
-const bequemGenerator = new BequemGenerator()
-bequemGenerator.boot()
+import BackgroundBoot from './boot'
+const backgroundBoot = new BackgroundBoot()
+backgroundBoot.boot()

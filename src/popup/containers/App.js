@@ -6,8 +6,8 @@ export default class AppContainer extends Component {
         super(props)
 
         this.state = {
-            selectedTab: 'Generate Code',
-            recording: []
+            recording: [],
+            components: []
         }
 
         this.onSelectTab = this.onSelectTab.bind(this)
@@ -18,7 +18,6 @@ export default class AppContainer extends Component {
         return React.createElement(App, {
             ...this.props,
             ...this.state,
-            onSelectTab: this.onSelectTab,
             onRestart: this.onRestart
         })
     }

@@ -1,13 +1,16 @@
 
 import Recorder from './recorder'
 
-export default class Daydream {
+export default class Boot {
   constructor () {
+
     this.isRunning = false
     this.recorder = new Recorder()
+
   }
 
   boot () {
+
     chrome.browserAction.onClicked.addListener(() => {
       if (this.isRunning) {
         this.recorder.stop()
@@ -21,4 +24,5 @@ export default class Daydream {
       this.isRunning = !this.isRunning
     })
   }
+
 }
