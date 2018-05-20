@@ -1,3 +1,3 @@
-# Bequem Generator
+# Bequem Selector Generator
 
-A chrome extension to record your actions into a chrome headless script and generate default test cases (demo).
+A simple chrome extension to output selector of all input, div, textarea tags in the html pages

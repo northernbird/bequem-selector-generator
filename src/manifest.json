@@ -1,8 +1,8 @@
 {
-  "name": "bequem-generator",
+  "name": "bequem-selector-generator",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "A chrome extension to record your actions into headless chrome script and basic test cases.",
+  "description": "A simple chrome extension to output selector of all input, div, textarea tags in the html page.",
   "permissions": [
     "storage",
     "webNavigation",
@@ -12,7 +12,7 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval'; https://*.segment.com https://*.mxpnl.com; object-src 'self'",
   "browser_action": {
     "default_icon": "images/icon-black.png",
-    "default_title": "Bequem Generator"
+    "default_title": "Bequem Selector Generator"
   },
   "background": {
     "scripts": [ "background.js" ],
