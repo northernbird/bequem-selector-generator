@@ -4,8 +4,7 @@ const selector = new Selector()
 class HTMLRecorder {
   start () {
     const inputElements = document.querySelectorAll('input, textarea')
-        // const clickableElements = document.querySelectorAll('a, button')
-    const clickElements = document.querySelectorAll('button')
+    const clickElements = document.querySelectorAll('a, button')
 
     for (let i = 0; i < inputElements.length; i++) {
       chrome.runtime.sendMessage({

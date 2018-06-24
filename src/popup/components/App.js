@@ -8,7 +8,7 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter'
 
 registerLanguage('javascript', js)
 
-const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
+const App = ({onSelectTab, selectedTab, onRestart, components}) => {
 
   const selectRowProp = {
 
@@ -70,7 +70,7 @@ const App = ({onSelectTab, selectedTab, onRestart, recording, components}) => {
     headerClasses: styles['col-value']
   }, {
     dataField: 'tagName',
-    text: 'TagName',
+    text: '',
     classes: styles['col-tagName'],
     headerStyle: {backgroundColor: '#49B882', color: 'white'},
     headerClasses: styles['col-tagName'],
