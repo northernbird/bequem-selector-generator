@@ -25,6 +25,8 @@ export default class AppContainer extends Component {
 // eslint-disable-next-line padded-blocks
   componentDidMount () {
     chrome.storage.sync.get(['recording', 'components'], ({recording, components}) => {
+      console.log('AAA')
+      console.log(JSON.stringify(components))
       this.setState({recording, components})
     })
   }

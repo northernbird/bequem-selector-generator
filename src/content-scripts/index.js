@@ -1,96 +1,35 @@
 import Selector from 'css-selector-generator'
-
 const selector = new Selector()
-let currentElement
-
-class EventRecorder {
-    start() {
-        const typeableElements = document.querySelectorAll('input, textarea')
-        const clickableElements = document.querySelectorAll('a, button')
-
-        for (let i = 0; i < typeableElements.length; i++) {
-            typeableElements[i].addEventListener('blur', this.handleBlur)
-            typeableElements[i].addEventListener("focus", this.handleForcus)
-        }
-
-        for (let i = 0; i < clickableElements.length; i++) {
-            clickableElements[i].addEventListener('click', this.handleClick)
-        }
-    }
-
-    handleForcus(e) {
-        currentElement = e.target;
-    }
-
-
-    handleBlur(e) {
-
-        if (currentElement) {
-            chrome.runtime.sendMessage({
-                selector: selector.getSelector(currentElement),
-                value: currentElement.value,
-                action: 'keydown',
-            })
-        }
-
-        currentElement = null;
-
-    }
-
-    handleClick(e) {
-        if (e.target.href) {
-            chrome.runtime.sendMessage({
-                action: 'url',
-                value: e.target.href
-            })
-        } else {
-            chrome.runtime.sendMessage({
-                selector: selector.getSelector(e.target),
-                value: e.target.value,
-                action: e.type,
-            })
-        }
-
-    }
-}
-
-const eventRecorder = new EventRecorder()
-eventRecorder.start()
-
 
 class HTMLRecorder {
-    start() {
-        const typeableElements = document.querySelectorAll('input, textarea')
+  start () {
+    const inputElements = document.querySelectorAll('input, textarea')
         // const clickableElements = document.querySelectorAll('a, button')
-        const clickableElements = document.querySelectorAll('button')
+    const clickElements = document.querySelectorAll('button')
 
-        for (let i = 0; i < typeableElements.length; i++) {
-
-            chrome.runtime.sendMessage({
-                selector: selector.getSelector(typeableElements[i]),
-                value: typeableElements[i].value,
-                id: (typeableElements[i].id==='') ? selector.getSelector(typeableElements[i]) : typeableElements[i].id,
-                name: typeableElements[i].name,
-                tagName: typeableElements[i].tagName,
-                inputType: (typeableElements[i].tagName==='INPUT') ? typeableElements[i].type : null,
-                action: 'component'
-            })
-
-        }
-
-        for (let i = 0; i < clickableElements.length; i++) {
-
-            chrome.runtime.sendMessage({
-                selector: selector.getSelector(clickableElements[i]),
-                value: clickableElements[i].value,
-                id: (clickableElements[i].id==='') ? selector.getSelector(clickableElements[i]) : clickableElements[i].id,
-                name: clickableElements[i].name,
-                tagName: clickableElements[i].tagName,
-                action: 'component'
-            })
-
-        }
+    for (let i = 0; i < inputElements.length; i++) {
+      chrome.runtime.sendMessage({
+        selector: selector.getSelector(inputElements[i]),
+        value: inputElements[i].value,
+        id: (inputElements[i].id === '') ? selector.getSelector(inputElements[i]) : inputElements[i].id,
+        name: inputElements[i].name,
+        tagName: inputElements[i].tagName,
+        inputType: (inputElements[i].tagName === 'INPUT') ? inputElements[i].type : null,
+        action: 'component'
+      })
     }
+
+    for (let i = 0; i < clickElements.length; i++) {
+      chrome.runtime.sendMessage({
+        selector: selector.getSelector(clickElements[i]),
+        value: clickElements[i].value,
+        id: (clickElements[i].id === '') ? selector.getSelector(clickElements[i]) : clickElements[i].id,
+        name: clickElements[i].name,
+        tagName: clickElements[i].tagName,
+        action: 'component'
+      })
+    }
+  }
 
 }
 
