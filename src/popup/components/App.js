@@ -17,33 +17,21 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
     hideSelectColumn: true, // enable hide selection column.
     clickToSelect: true,  // you should enable clickToSelect, otherwise, you can't select column.
     onSelect: (row, isSelected) => {
-      if (isSelected) {
 
-        row.isSelected = true
+      row.isSelected = isSelected
 
-        chrome.storage.local.set({
-          selectedRow: row
-        }, function () {
+      chrome.storage.local.set({
+        selectedRow: row
 
-          chrome.tabs.insertCSS(null, {file: 'inject.css'}, () => {
-            chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
-              chrome.tabs.executeScript(null, {file: 'inject.js'})
-            })
-          })
+      }, function () {
 
-        })
-      } else {
-
-        row.isSelected = false
-
-        chrome.storage.local.set({
-          selectedRow: row
-        }, function () {
+        chrome.tabs.insertCSS(null, {file: 'inject.css'}, () => {
           chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
-            chrome.tabs.executeScript(null, {file: 'inject.js'})
+            chrome.tabs.executeScript(null, {file: 'inject-insert.js'})
           })
         })
-      }
+      })
+
     }
 
   }
@@ -101,7 +89,7 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
 
   </div>)
 
-  if(components && components.length > 0) {
+  if (components && components.length > 0) {
     return (<div>
 
       <div className={styles.urlDiv}>
@@ -110,7 +98,7 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
 
       <div className={styles.tableWrapDiv}>
         <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}
-          selectRow={selectRowProp} filter={filterFactory()} />
+                        selectRow={selectRowProp} filter={filterFactory()}/>
 
       </div>
 

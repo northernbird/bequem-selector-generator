@@ -4,7 +4,6 @@
      */
   chrome.storage.local.get('selectedRow', function (data) {
     if (data.selectedRow.isSelected) {
-      // $(data.selectedRow.selector).addClass('bequem-selector-selected')
       $(data.selectedRow.selector).toggleClass('bequem-selector-selected')
 
       const position = $(data.selectedRow.selector).offset()
