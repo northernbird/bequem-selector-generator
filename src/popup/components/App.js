@@ -8,7 +8,7 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter'
 
 registerLanguage('javascript', js)
 
-const App = ({onRestart, url, components}) => {
+const App = ({onRestart, tabId, url, components}) => {
 
   const selectRowProp = {
 
@@ -23,7 +23,7 @@ const App = ({onRestart, url, components}) => {
       chrome.storage.local.set({
         selectedRow: row
       }, () => {
-        chrome.tabs.executeScript(null, {file: 'inject-insert.js'})
+        chrome.tabs.executeScript(tabId, {file: 'inject-insert.js'})
       })
 
     }

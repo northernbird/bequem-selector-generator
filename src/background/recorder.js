@@ -2,22 +2,24 @@ export default class Recorder {
   constructor () {
     this.url = null
     this.components = []
+    this.tabId = null
   }
 
   start () {
-    this.url = 'TODO'
     chrome.tabs.executeScript({file: 'content-script.js'}, () => {
       chrome.tabs.insertCSS(null, {file: 'inject.css'}, () => {
         chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'})
       })
     })
 
-    const setUrl = (url) => {
+    const save = (url, tabId) => {
       this.url = url
+      this.tabId = tabId
     }
 
     chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-      setUrl(tabs[0].url)
+      console.log('tabId : ' + tabs[0].id)
+      save(tabs[0].url, tabs[0].id)
     })
 
     chrome.runtime.onMessage.addListener(this.handleMessage.bind(this))
