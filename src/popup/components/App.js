@@ -8,7 +8,7 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter'
 
 registerLanguage('javascript', js)
 
-const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
+const App = ({onRestart, url, components}) => {
 
   const selectRowProp = {
 
@@ -22,15 +22,8 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
 
       chrome.storage.local.set({
         selectedRow: row
-
-      }, function () {
-
-        chrome.tabs.insertCSS(null, {file: 'inject.css'}, () => {
-          chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
-            chrome.tabs.executeScript(null, {file: 'inject-insert.js'})
-          })
-        })
-
+      }, () => {
+        chrome.tabs.executeScript(null, {file: 'inject-insert.js'})
       })
 
     }
@@ -80,16 +73,6 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
     headerClasses: styles['col-inputType']
   }]
 
-  const initDev = (<div>
-
-    Grats init
-
-    <div className={styles.buttonDiv}>
-      <button className={styles.button} onClick={onRestart}>Clear</button>
-    </div>
-
-  </div>)
-
   if (components && components.length > 0) {
     return (<div>
 
@@ -99,7 +82,7 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
 
       <div className={styles.tableWrapDiv}>
         <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}
-                        selectRow={selectRowProp} filter={filterFactory()}/>
+          selectRow={selectRowProp} filter={filterFactory()} />
 
       </div>
 
@@ -110,7 +93,15 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
     </div>)
 
   } else {
-    return initDev
+    return (<div>
+
+      Grats init
+
+      <div className={styles.buttonDiv}>
+        <button className={styles.button} onClick={onRestart}>Clear</button>
+      </div>
+
+    </div>)
   }
 
 }

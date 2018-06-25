@@ -1,11 +1,10 @@
-// alert('AAABBBCCC')
-// alert('XXXXXX')
-// $('*').removeClass('bequem-selector-selected')
-//
+/*
+ * Currently this script isn't used
+ */
 (function ($) {
-  alert('YYYYYY')
   // $('*').removeClass('bequem-selector-selected')
   confirm('All saved contents will be aborted!')
   window.location.reload()
+  // chrome.runtime.reload()
 })(jQuery)
 

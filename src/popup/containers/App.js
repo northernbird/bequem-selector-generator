@@ -6,11 +6,10 @@ export default class AppContainer extends Component {
     super(props)
 
     this.state = {
-      recording: [],
-      components: []
+      components: [],
+      url: null
     }
 
-    this.onSelectTab = this.onSelectTab.bind(this)
     this.onRestart = this.onRestart.bind(this)
   }
 
@@ -29,19 +28,16 @@ export default class AppContainer extends Component {
     })
   }
 
-  onSelectTab (selectedTab) {
-    this.setState({selectedTab})
-  }
-
   onRestart () {
     chrome.browserAction.setIcon({path: './images/icon-black.png'})
-    chrome.tabs.executeScript({file: 'inject-remove.js'}, () => {
-      chrome.runtime.reload()
-      window.close()
-    })
+    const code = 'confirm(\'All saved contents will be aborted!\'); window.location.reload();'
+    /*
+     * TODO : make sure why executeScript with file doesn't work correctly!
+     */
+    chrome.tabs.executeScript({code: code})
+    chrome.runtime.reload()
 
-    // chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
-    //   chrome.tabs.executeScript(null, {file: 'inject-remove.js'})
-    // })
+    window.close()
   }
+
 }
