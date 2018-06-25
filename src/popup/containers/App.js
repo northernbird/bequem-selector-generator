@@ -35,19 +35,13 @@ export default class AppContainer extends Component {
 
   onRestart () {
     chrome.browserAction.setIcon({path: './images/icon-black.png'})
-
-    console.log('on restart!!')
-    var code = 'window.location.reload();'
-    // chrome.tabs.executeScript({code: code})
-
-    // reload and remove all injected components
-    chrome.tabs.query({active: true}, function (tab) {
-      console.log('test : ' + tab.id)
+    chrome.tabs.executeScript({file: 'inject-remove.js'}, () => {
+      chrome.runtime.reload()
+      window.close()
     })
 
-    chrome.tabs.executeScript({code: code})
-    chrome.runtime.reload()
-
-    window.close()
+    // chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
+    //   chrome.tabs.executeScript(null, {file: 'inject-remove.js'})
+    // })
   }
 }

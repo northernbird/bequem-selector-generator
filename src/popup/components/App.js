@@ -30,6 +30,7 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
             chrome.tabs.executeScript(null, {file: 'inject-insert.js'})
           })
         })
+
       })
 
     }
