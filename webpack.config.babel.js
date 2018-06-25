@@ -11,7 +11,7 @@ const base = {
   entry: {
     background: './src/background/index.js',
     'content-script': './src/content-scripts/index.js',
-    popup: './src/popup/index.js',
+    popup: './src/popup/index.js'
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -30,8 +30,9 @@ const base = {
     new CopyPlugin([
       { from: './src/manifest.json', to: './manifest.json' },
       { from: './src/images', to: 'images' },
-      //TODO need to check how to configure injection javascript for chrome extension.
+      // TODO need to check how to configure injection javascript for chrome extension.
       { from: './src/popup/components/inject.js', to: './' },
+      { from: './src/popup/components/inject.css', to: './' },
       { from: './src/popup/components/lib/jquery-1.10.2.min.js', to: './lib/jquery-1.10.2.min.js' }
     ]),
     new HtmlWebpackPlugin({
@@ -67,13 +68,13 @@ const development = {
           }
         ]
       },
-        {
-            test: /\.(ttf|otf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?|(jpg|gif)$/,
-            include: /node_modules/,
-            use: [
-                'url-loader'
-            ]
-        }
+      {
+        test: /\.(ttf|otf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?|(jpg|gif)$/,
+        include: /node_modules/,
+        use: [
+          'url-loader'
+        ]
+      }
     ]
   },
   plugins: [
@@ -91,7 +92,7 @@ const production = {
       ...base.module.rules,
       {
         test: /\.css$/,
-          include: [/src/, /node_modules/],
+        include: [/src/, /node_modules/],
         use: ExtractTextPlugin.extract({
           use: [
             {

@@ -24,9 +24,13 @@ const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
         chrome.storage.local.set({
           selectedRow: row
         }, function () {
-          chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
-            chrome.tabs.executeScript(null, {file: 'inject.js'})
+
+          chrome.tabs.insertCSS(null, {file: 'inject.css'}, () => {
+            chrome.tabs.executeScript(null, {file: './lib/jquery-1.10.2.min.js'}, function () {
+              chrome.tabs.executeScript(null, {file: 'inject.js'})
+            })
           })
+
         })
       } else {
 
