@@ -7,6 +7,7 @@ export default class Boot {
   }
 
   boot () {
+    // Fired when a browser action icon is clicked. This event will not fire if the browser action has a popup.
     chrome.browserAction.onClicked.addListener(() => {
       if (this.isRunning) {
         this.recorder.stop()
@@ -18,6 +19,24 @@ export default class Boot {
         chrome.browserAction.setIcon({path: './images/icon-green.png'})
       }
       this.isRunning = !this.isRunning
+    })
+
+    chrome.runtime.onConnect.addListener(function (port) {
+      chrome.storage.sync.get(['tabId', 'url', 'components', 'selectRowIds'], ({tabId, url, components, selectRowIds}) => {
+        console.log('TEST : ' + JSON.stringify(selectRowIds))
+        console.log('TEST1 : ' + JSON.stringify(components))
+      })
+
+      chrome.storage.local.get('selectRowIds', function (data) {
+        console.log('AAA' + JSON.stringify(data))
+      })
+
+      if (port.name === 'P1') {
+        port.onDisconnect.addListener(function () {
+          /* Clean up happens here */
+          console.log('HIHIHIHIHI')
+        })
+      }
     })
   }
 

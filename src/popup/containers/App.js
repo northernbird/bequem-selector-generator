@@ -23,8 +23,12 @@ export default class AppContainer extends Component {
 
 // eslint-disable-next-line padded-blocks
   componentDidMount () {
-    chrome.storage.sync.get(['tabId', 'url', 'components'], ({tabId, url, components}) => {
-      this.setState({tabId, url, components})
+    console.log('componentDidMount')
+    // popup code
+    chrome.runtime.connect({name: 'P1'})
+    chrome.storage.sync.get(['tabId', 'url', 'components', 'selectRowIds'], ({tabId, url, components, selectRowIds}) => {
+      console.log('TEST : ' + JSON.stringify(selectRowIds))
+      this.setState({tabId, url, components, selectRowIds})
     })
   }
 

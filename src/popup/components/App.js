@@ -8,7 +8,15 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter'
 
 registerLanguage('javascript', js)
 
-const App = ({onRestart, tabId, url, components}) => {
+const App = ({onRestart, tabId, url, components, selectRowIds}) => {
+
+  let test = ''
+  if(!selectRowIds) {
+    selectRowIds = []
+    test = 'init'
+  } else {
+    test = 'not'
+  }
 
   const selectRowProp = {
 
@@ -16,9 +24,24 @@ const App = ({onRestart, tabId, url, components}) => {
     bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
     hideSelectColumn: true, // enable hide selection column.
     clickToSelect: true,  // you should enable clickToSelect, otherwise, you can't select column.
-    onSelect: (row, isSelected) => {
+    selected: selectRowIds, // should be a row keys array
+    onSelect: (row, isSelected, rowIndex, e) => {
+
+      if(isSelected) {
+        selectRowIds.push(rowIndex)
+      } else {
+        const index = selectRowIds.indexOf(rowIndex)
+        if (index > -1) {
+          selectRowIds.splice(index, 1)
+        }
+      }
+
+      chrome.storage.local.set({
+        selectRowIds: row
+      })
 
       row.isSelected = isSelected
+      console.log('TEST : ' + JSON.stringify(selectRowIds))
 
       chrome.storage.local.set({
         selectedRow: row
@@ -79,6 +102,9 @@ const App = ({onRestart, tabId, url, components}) => {
       <div className={styles.urlDiv}>
         URL : {url}
       </div>
+
+      TEST : {JSON.stringify(selectRowIds)}
+      TEST1 : {test}
 
       <div className={styles.tableWrapDiv}>
         <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}

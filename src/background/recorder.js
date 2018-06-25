@@ -18,7 +18,6 @@ export default class Recorder {
     }
 
     chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-      console.log('tabId : ' + tabs[0].id)
       save(tabs[0].url, tabs[0].id)
     })
 
