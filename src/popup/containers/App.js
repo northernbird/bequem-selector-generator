@@ -36,6 +36,7 @@ export default class AppContainer extends Component {
   onRestart () {
     chrome.browserAction.setIcon({path: './images/icon-black.png'})
     chrome.runtime.reload()
+    // reload and remove all injected components
     window.close()
   }
 }
