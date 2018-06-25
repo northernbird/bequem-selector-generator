@@ -13,8 +13,7 @@ class HTMLRecorder {
         id: (inputElements[i].id === '') ? selector.getSelector(inputElements[i]) : inputElements[i].id,
         name: inputElements[i].name,
         tagName: inputElements[i].tagName,
-        inputType: (inputElements[i].tagName === 'INPUT') ? inputElements[i].type : null,
-        action: 'component'
+        inputType: (inputElements[i].tagName === 'INPUT') ? inputElements[i].type : null
       })
     }
 
@@ -24,8 +23,7 @@ class HTMLRecorder {
         value: clickElements[i].value,
         id: (clickElements[i].id === '') ? selector.getSelector(clickElements[i]) : clickElements[i].id,
         name: clickElements[i].name,
-        tagName: clickElements[i].tagName,
-        action: 'component'
+        tagName: clickElements[i].tagName
       })
     }
   }

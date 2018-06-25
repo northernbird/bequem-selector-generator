@@ -24,9 +24,7 @@
       div.css(testCSS)
     } else {
       $(data.selectedRow.selector).css({'background-color': '#FFFFFF'})
-            // row.css({backgroundColor: '#00FF91'});
       console.log('changed!! B' + data.selectedRow.selector)
-            // chrome.storage.local.remove('selectedRow');
     }
   })
 })(jQuery)

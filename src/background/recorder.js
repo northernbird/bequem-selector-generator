@@ -1,6 +1,6 @@
 export default class Recorder {
   constructor () {
-    this.recording = []
+    this.url = null
     this.components = []
   }
 
@@ -16,8 +16,12 @@ export default class Recorder {
   }
 
   handleCompletedNavigation ({url, frameId}) {
+    /*
+     * Execute against the current active tab!
+     */
     if (frameId === 0) {
       chrome.tabs.executeScript({file: 'content-script.js'})
+      this.url = url
     }
   }
 

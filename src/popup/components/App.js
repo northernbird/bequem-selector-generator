@@ -8,7 +8,7 @@ import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter'
 
 registerLanguage('javascript', js)
 
-const App = ({onSelectTab, selectedTab, onRestart, components}) => {
+const App = ({onSelectTab, selectedTab, onRestart, url, components}) => {
 
   const selectRowProp = {
 
@@ -87,20 +87,6 @@ const App = ({onSelectTab, selectedTab, onRestart, components}) => {
     headerClasses: styles['col-inputType']
   }]
 
-  const loadedDiv = (<div>
-
-    <div className={styles.tableWrapDiv}>
-      <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}
-        selectRow={selectRowProp} filter={filterFactory()} />
-
-    </div>
-
-    <div className={styles.buttonDiv}>
-      <button className={styles.button} onClick={onRestart}>Clear</button>
-    </div>
-
-  </div>)
-
   const initDev = (<div>
 
     Grats init
@@ -111,14 +97,26 @@ const App = ({onSelectTab, selectedTab, onRestart, components}) => {
 
   </div>)
 
-  console.log('test : ' + JSON.stringify(components))
-
   if(components && components.length > 0) {
-    console.log('loaded')
-    return loadedDiv
+    return (<div>
+
+      <div className={styles.urlDiv}>
+        URL : {url}
+      </div>
+
+      <div className={styles.tableWrapDiv}>
+        <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}
+          selectRow={selectRowProp} filter={filterFactory()} />
+
+      </div>
+
+      <div className={styles.buttonDiv}>
+        <button className={styles.button} onClick={onRestart}>Clear</button>
+      </div>
+
+    </div>)
 
   } else {
-    console.log('init')
     return initDev
   }
 

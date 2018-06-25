@@ -10,7 +10,7 @@ export default class Boot {
     chrome.browserAction.onClicked.addListener(() => {
       if (this.isRunning) {
         this.recorder.stop()
-        chrome.storage.sync.set({recording: this.recorder.recording, components: this.recorder.components})
+        chrome.storage.sync.set({url: this.recorder.url, components: this.recorder.components})
         chrome.browserAction.setIcon({path: './images/icon-red.png'})
         chrome.browserAction.setPopup({popup: 'index.html'})
       } else {
