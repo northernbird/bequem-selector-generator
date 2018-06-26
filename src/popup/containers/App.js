@@ -34,7 +34,7 @@ export default class AppContainer extends Component {
 
   onRestart () {
     chrome.browserAction.setIcon({path: './images/icon-black.png'})
-    const code = 'confirm(\'All saved contents will be aborted!\'); window.location.reload();'
+    const code = 'alert(\'All saved selector data will be aborted!\'); window.location.reload();'
 
     chrome.storage.sync.set({
       selectRowIds: []
