@@ -57,9 +57,17 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
     selectRowProp.selected = selectRowIds// should be a row keys array
   }
 
-  const selectOptions = {
+  const tagNameSelectOptions = {
     'INPUT': 'INPUT',
     'TEXTAREA': 'TEXTAREA'
+  }
+
+  const inputTypeSelectOptions = {
+    'text': 'text',
+    'radio': 'radio',
+    'submit': 'submit',
+    'hidden': 'hidden',
+    'checkbox': 'checkbox'
   }
 
   const columns = [{
@@ -87,17 +95,22 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
     classes: styles['col-tagName'],
     headerStyle: {backgroundColor: '#49B882', color: 'white'},
     headerClasses: styles['col-tagName'],
-    formatter: cell => selectOptions[cell],
+    formatter: cell => tagNameSelectOptions[cell],
     filter: selectFilter({
-      options: selectOptions,
+      options: tagNameSelectOptions,
       defaultValue: ''
     })
   }, {
     dataField: 'inputType',
-    text: 'InputType',
+    text: '',
     classes: styles['col-tagName'],
     headerStyle: {backgroundColor: '#49B882', color: 'white'},
-    headerClasses: styles['col-inputType']
+    headerClasses: styles['col-inputType'],
+    formatter: cell => inputTypeSelectOptions[cell],
+    filter: selectFilter({
+      options: inputTypeSelectOptions,
+      defaultValue: ''
+    })
   }]
 
   if (components && components.length > 0) {
