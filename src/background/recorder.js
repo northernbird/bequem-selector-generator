@@ -27,7 +27,6 @@ export default class Recorder {
   stop () {
     chrome.webNavigation.onCommitted.removeListener()
     chrome.runtime.onMessage.removeListener()
-    chrome.tabs.onUpdated.removeListener()
   }
 
   handleMessage (message) {

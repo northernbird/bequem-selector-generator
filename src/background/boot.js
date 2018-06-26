@@ -24,6 +24,16 @@ export default class Boot {
       }
       this.isRunning = !this.isRunning
     })
+
+    /*
+     * Force to reload extension if used tab is refreshed
+     */
+    chrome.tabs.onUpdated.addListener((refreshedTabId) => {
+      if (refreshedTabId === this.recorder.tabId) {
+        chrome.browserAction.setIcon({path: './images/icon-black.png'})
+        chrome.runtime.reload()
+      }
+    })
   }
 
 }
