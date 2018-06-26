@@ -4,6 +4,7 @@
      */
   chrome.storage.local.get('selectedRow', function (data) {
     if (data.selectedRow.isSelected) {
+      console.log('selected : ' + data.selectedRow.selector)
       $(data.selectedRow.selector).toggleClass('bequem-selector-selected')
 
       const position = $(data.selectedRow.selector).offset()
@@ -18,7 +19,7 @@
       //   width: $(data.selectedRow.selector).outerWidth(),
       //   height: $(data.selectedRow.selector).outerHeight()
       // }
-
+      //
       // var div = $('<div id="new">')
       // div.appendTo($('body'))
       // div.css(testCSS)

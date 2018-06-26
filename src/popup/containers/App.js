@@ -23,24 +23,28 @@ export default class AppContainer extends Component {
 
 // eslint-disable-next-line padded-blocks
   componentDidMount () {
-    console.log('componentDidMount')
-    // popup code
-    chrome.runtime.connect({name: 'P1'})
-
     chrome.storage.sync.get(['tabId', 'url', 'components', 'selectRowIds'], ({tabId, url, components, selectRowIds}) => {
       this.setState({tabId, url, components, selectRowIds})
+      /*
+      * Active tab for selector generator
+      */
+      chrome.tabs.update(tabId, {highlighted: true})
     })
   }
 
   onRestart () {
     chrome.browserAction.setIcon({path: './images/icon-black.png'})
     const code = 'confirm(\'All saved contents will be aborted!\'); window.location.reload();'
+
+    chrome.storage.sync.set({
+      selectRowIds: []
+    })
+
     /*
      * TODO : make sure why executeScript with file doesn't work correctly!
      */
     chrome.tabs.executeScript({code: code})
     chrome.runtime.reload()
-
     window.close()
   }
 
