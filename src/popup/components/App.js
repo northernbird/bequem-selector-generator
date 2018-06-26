@@ -10,12 +10,23 @@ registerLanguage('javascript', js)
 
 const App = ({onRestart, tabId, url, components, selectRowIds}) => {
 
-  let test = ''
-  if(!selectRowIds) {
-    selectRowIds = []
-    test = 'init'
-  } else {
-    test = 'not'
+  const updateSelectedRowIds = (isSelected, row, selectRowIds) => {
+
+    if(!selectRowIds) {
+      selectRowIds = []
+    }
+
+    if(isSelected) {
+      selectRowIds.push(row.id)
+    } else {
+      const index = selectRowIds.indexOf(row.id)
+      if (index > -1) {
+        selectRowIds.splice(index, 1)
+      }
+    }
+
+    return selectRowIds
+
   }
 
   const selectRowProp = {
@@ -24,24 +35,13 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
     bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
     hideSelectColumn: true, // enable hide selection column.
     clickToSelect: true,  // you should enable clickToSelect, otherwise, you can't select column.
-    selected: selectRowIds, // should be a row keys array
     onSelect: (row, isSelected, rowIndex, e) => {
 
-      if(isSelected) {
-        selectRowIds.push(rowIndex)
-      } else {
-        const index = selectRowIds.indexOf(rowIndex)
-        if (index > -1) {
-          selectRowIds.splice(index, 1)
-        }
-      }
-
-      chrome.storage.local.set({
-        selectRowIds: row
+      chrome.storage.sync.set({
+        selectRowIds: updateSelectedRowIds(isSelected, row, selectRowIds)
       })
 
       row.isSelected = isSelected
-      console.log('TEST : ' + JSON.stringify(selectRowIds))
 
       chrome.storage.local.set({
         selectedRow: row
@@ -51,6 +51,10 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
 
     }
 
+  }
+
+  if(selectRowIds) {
+    selectRowProp.selected = selectRowIds// should be a row keys array
   }
 
   const selectOptions = {
@@ -102,9 +106,6 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
       <div className={styles.urlDiv}>
         URL : {url}
       </div>
-
-      TEST : {JSON.stringify(selectRowIds)}
-      TEST1 : {test}
 
       <div className={styles.tableWrapDiv}>
         <BootstrapTable keyField='id' data={components} columns={columns} trClassName={styles.tableDiv}

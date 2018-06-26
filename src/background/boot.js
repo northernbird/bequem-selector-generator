@@ -22,14 +22,14 @@ export default class Boot {
     })
 
     chrome.runtime.onConnect.addListener(function (port) {
-      chrome.storage.sync.get(['tabId', 'url', 'components', 'selectRowIds'], ({tabId, url, components, selectRowIds}) => {
-        console.log('TEST : ' + JSON.stringify(selectRowIds))
-        console.log('TEST1 : ' + JSON.stringify(components))
-      })
+      // chrome.storage.sync.get(['tabId', 'url', 'components'], ({tabId, url, components, selectRowIds}) => {
+      //   console.log('TEST : ' + JSON.stringify(selectRowIds))
+      //   console.log('TEST1 : ' + JSON.stringify(components))
+      // })
 
-      chrome.storage.local.get('selectRowIds', function (data) {
-        console.log('AAA' + JSON.stringify(data))
-      })
+      // chrome.storage.local.get('selectRowIds', function (data) {
+      //   console.log('AAA' + JSON.stringify(data))
+      // })
 
       if (port.name === 'P1') {
         port.onDisconnect.addListener(function () {
