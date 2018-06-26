@@ -98,7 +98,7 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
     formatter: cell => tagNameSelectOptions[cell],
     filter: selectFilter({
       options: tagNameSelectOptions,
-      defaultValue: ''
+      defaultValue: 'INPUT'
     })
   }, {
     dataField: 'inputType',
@@ -109,7 +109,7 @@ const App = ({onRestart, tabId, url, components, selectRowIds}) => {
     formatter: cell => inputTypeSelectOptions[cell],
     filter: selectFilter({
       options: inputTypeSelectOptions,
-      defaultValue: ''
+      defaultValue: 'text'
     })
   }]
 
