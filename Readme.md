@@ -2,6 +2,11 @@
 
 A chrome extension to output selector of all input, div, textarea tags in the html pages
 
+
+## Example
+
+![Example](https://github.com/northernbird/bequem-selector-generator/blob/master/Example.png)
+
 ## Installing
 
 ### Google Chrome
